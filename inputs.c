@@ -8,15 +8,17 @@ void poll_events(struct Inputs* in, struct SDL_CLASS* sc, struct Player_Class* p
     case SDL_KEYDOWN: {
       switch (in->keys) {
       case JUMP_ACTION: {
-        jump(player->jump_strength, player->player_states->is_jumping);
+        player->player_states->is_jumping = 1;
         break;
       }
       case LEFT: {
-        move(-player->move_rate, player->player_states->is_running);
+        player->move_direction           = -player->move_rate;
+        player->player_states->is_moving = 1;
         break;
       }
       case RIGHT: {
-        move(player->move_rate, player->player_states->is_running);
+        player->move_direction           = player->move_rate;
+        player->player_states->is_moving = 1;
         break;
       }
       case UP: {
@@ -31,6 +33,27 @@ void poll_events(struct Inputs* in, struct SDL_CLASS* sc, struct Player_Class* p
       break;
     }
     case SDL_KEYUP: {
+      switch (in->keys) {
+      case JUMP_ACTION: {
+        break;
+      }
+      case LEFT: {
+        player->player_states->is_moving = 0;
+        break;
+      }
+      case RIGHT: {
+        player->player_states->is_moving = 0;
+        break;
+      }
+      case UP: {
+        /*implement look up*/
+        break;
+      }
+      case DOWN: {
+        /*implement look down*/
+        break;
+      }
+      }
       break;
     }
     case SDL_WINDOWEVENT: {

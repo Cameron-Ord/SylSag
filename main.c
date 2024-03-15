@@ -2,7 +2,6 @@
 #include "inc/inputs.h"
 #include "inc/player.h"
 #include "inc/render.h"
-
 int main(int argc, char* argv[]) {
   int                 err;
   struct Inputs       inputs;
@@ -31,6 +30,7 @@ int main(int argc, char* argv[]) {
   inputs.running    = &sdl_class.running;
   while (sdl_class.running) {
     poll_events(&inputs, &sdl_class, &player);
+    do_player_events(&player);
     do_render(rend.r, win.w);
   }
 
