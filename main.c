@@ -1,16 +1,17 @@
 #include "inc/main.h"
 #include "inc/inputs.h"
+#include "inc/player.h"
 #include "inc/render.h"
-#include "inc/struct_main.h"
 
 int main(int argc, char* argv[]) {
-  int              err;
-  struct Inputs    inputs;
-  struct SDL_CLASS sdl_class;
-  Renderer         rend;
-  Window           win;
-  Player_Class     player;
-  SDL_Audio        audio;
+  int                 err;
+  struct Inputs       inputs;
+  struct Player_Class player;
+  struct SDL_CLASS    sdl_class;
+  Player_States       player_states;
+  Renderer            rend;
+  Window              win;
+  SDL_Audio           audio;
   err = init_sdl2();
   if (err < 0) {
     return 1;
@@ -24,11 +25,12 @@ int main(int argc, char* argv[]) {
   if (err < 0) {
     return 1;
   }
-  assign_allocated_ptrs(&sdl_class, win, rend, audio);
+  assign_allocated_ptrs(&sdl_class, &win, &rend, &audio);
+  initialize_player(&player, &player_states);
   sdl_class.running = 1;
   inputs.running    = &sdl_class.running;
   while (sdl_class.running) {
-    poll_events(&inputs, &sdl_class);
+    poll_events(&inputs, &sdl_class, &player);
     do_render(rend.r, win.w);
   }
 
@@ -99,8 +101,8 @@ int create_audio_device(SDL_Audio* audio) {
   return 0;
 }
 
-void assign_allocated_ptrs(struct SDL_CLASS* sdl_class, Window w, Renderer r, SDL_Audio aud) {
-  sdl_class->win   = &w;
-  sdl_class->ren   = &r;
-  sdl_class->audio = &aud;
+void assign_allocated_ptrs(struct SDL_CLASS* sdl_class, Window* w, Renderer* r, SDL_Audio* aud) {
+  sdl_class->win   = w;
+  sdl_class->ren   = r;
+  sdl_class->audio = aud;
 }

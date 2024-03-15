@@ -1,5 +1,6 @@
 #ifndef STRUCT_INPUTS_H
 #define STRUCT_INPUTS_H
+#include "player_structs.h"
 #include "struct_main.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_keycode.h>

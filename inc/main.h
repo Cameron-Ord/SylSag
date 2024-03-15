@@ -19,5 +19,5 @@ int  init_sdl2();
 int  create_renderer(SDL_Renderer** r, SDL_Window** w);
 int  create_window(Window** w);
 int  create_audio_device(SDL_Audio* audio);
-void assign_allocated_ptrs(struct SDL_CLASS* sdl_class, Window w, Renderer r, SDL_Audio aud);
+void assign_allocated_ptrs(struct SDL_CLASS* sdl_class, Window* w, Renderer* r, SDL_Audio* aud);
 #endif

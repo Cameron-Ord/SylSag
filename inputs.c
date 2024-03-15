@@ -1,12 +1,33 @@
 #include "inc/inputs.h"
-#include <SDL2/SDL_events.h>
-#include <SDL2/SDL_video.h>
+#include "inc/movement.h"
 
-void poll_events(struct Inputs* in, struct SDL_CLASS* sc) {
+void poll_events(struct Inputs* in, struct SDL_CLASS* sc, struct Player_Class* player) {
   SDL_Event e;
   while (SDL_PollEvent(&e)) {
     switch (e.type) {
     case SDL_KEYDOWN: {
+      switch (in->keys) {
+      case JUMP_ACTION: {
+        jump(player->jump_strength, player->player_states->is_jumping);
+        break;
+      }
+      case LEFT: {
+        move(-player->move_rate, player->player_states->is_running);
+        break;
+      }
+      case RIGHT: {
+        move(player->move_rate, player->player_states->is_running);
+        break;
+      }
+      case UP: {
+        /*implement look up*/
+        break;
+      }
+      case DOWN: {
+        /*implement look down*/
+        break;
+      }
+      }
       break;
     }
     case SDL_KEYUP: {

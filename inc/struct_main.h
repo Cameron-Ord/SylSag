@@ -10,11 +10,6 @@ typedef struct {
 } SDL_Audio;
 
 typedef struct {
-  int pos_x;
-  int pos_y;
-} Player_Class;
-
-typedef struct {
   SDL_Renderer*     r;
   SDL_RendererFlags r_flags;
 } Renderer;
@@ -28,7 +23,6 @@ typedef struct {
 
 struct SDL_CLASS {
   SDL_Audio*    audio;
-  Player_Class* player;
   Window*       win;
   Renderer*     ren;
   SDL_errorcode sdl_err;
