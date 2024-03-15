@@ -1,1 +1,1 @@
-clang -o main main.c audiocallback.c -Wextra -Wall -Iinc -lm -lSDL2
+clang -o main main.c inputs.c render.c audiocallback.c -Wextra -Wall -Iinc -lm -lSDL2
