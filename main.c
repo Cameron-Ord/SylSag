@@ -8,6 +8,7 @@ int main(int argc, char* argv[]) {
   struct Player_Class player;
   struct SDL_CLASS    sdl_class;
   Player_States       player_states;
+  PLAYER_METADATA     metadata;
   Renderer            rend;
   Window              win;
   SDL_Audio           audio;
@@ -25,13 +26,18 @@ int main(int argc, char* argv[]) {
     return 1;
   }
   assign_allocated_ptrs(&sdl_class, &win, &rend, &audio);
-  initialize_player(&player, &player_states);
+  initialize_player(&player, &player_states, &metadata);
+  create_player_sprite(rend.r, &player);
+
+  printf("MOVING STATUS : %d\n", player.player_states->is_moving);
   sdl_class.running = 1;
   inputs.running    = &sdl_class.running;
   while (sdl_class.running) {
     poll_events(&inputs, &sdl_class, &player);
     do_player_events(&player);
-    do_render(rend.r, win.w);
+    clear_render(rend.r);
+    render_player(rend.r, player);
+    present_render(rend.r);
   }
 
   return 0;

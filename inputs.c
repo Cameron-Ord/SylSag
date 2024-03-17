@@ -6,7 +6,7 @@ void poll_events(struct Inputs* in, struct SDL_CLASS* sc, struct Player_Class* p
   while (SDL_PollEvent(&e)) {
     switch (e.type) {
     case SDL_KEYDOWN: {
-      switch (in->keys) {
+      switch (e.key.keysym.sym) {
       case JUMP_ACTION: {
         player->player_states->is_jumping = 1;
         break;
@@ -33,7 +33,7 @@ void poll_events(struct Inputs* in, struct SDL_CLASS* sc, struct Player_Class* p
       break;
     }
     case SDL_KEYUP: {
-      switch (in->keys) {
+      switch (e.key.keysym.sym) {
       case JUMP_ACTION: {
         break;
       }

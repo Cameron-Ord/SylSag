@@ -11,16 +11,24 @@ typedef struct {
   int receiving_damage;
 } Player_States;
 
+typedef struct {
+  SDL_Texture* tex;
+  SDL_Surface* surf;
+  SDL_Rect     src;
+  SDL_Rect     dst;
+} PLAYER_METADATA;
+
 struct Player_Class {
-  int            move_rate;
-  int            move_direction;
-  int            jump_strength;
-  int            attack_damage;
-  int            health;
-  int            level;
-  int            pos_x;
-  int            pos_y;
-  Player_States* player_states;
+  int              move_rate;
+  int              move_direction;
+  int              jump_strength;
+  int              attack_damage;
+  int              health;
+  int              level;
+  int              pos_x;
+  int              pos_y;
+  Player_States*   player_states;
+  PLAYER_METADATA* meta;
 };
 
 #endif
