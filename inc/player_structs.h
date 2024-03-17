@@ -8,6 +8,7 @@ typedef struct {
   int is_running;
   int is_moving;
   int is_attacking;
+  int is_falling;
   int receiving_damage;
 } Player_States;
 
@@ -22,6 +23,7 @@ struct Player_Class {
   int              move_rate;
   int              move_direction;
   int              jump_strength;
+  int              jump_max;
   int              attack_damage;
   int              health;
   int              level;

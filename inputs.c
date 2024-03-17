@@ -8,7 +8,9 @@ void poll_events(struct Inputs* in, struct SDL_CLASS* sc, struct Player_Class* p
     case SDL_KEYDOWN: {
       switch (e.key.keysym.sym) {
       case JUMP_ACTION: {
-        player->player_states->is_jumping = 1;
+        if (!player->player_states->is_jumping) {
+          player->player_states->is_jumping = 1;
+        }
         break;
       }
       case LEFT: {

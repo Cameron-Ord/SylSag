@@ -16,8 +16,8 @@ void create_player_sprite(SDL_Renderer* r, struct Player_Class* player) {
   player->meta->surf = IMG_Load("TEST.png");
   player->meta->tex  = SDL_CreateTextureFromSurface(r, player->meta->surf);
   SDL_FreeSurface(player->meta->surf);
-  player->meta->dst.x = 100;
-  player->meta->dst.y = 100;
+  player->meta->dst.x = player->pos_x;
+  player->meta->dst.y = player->pos_y;
   player->meta->dst.w = 32;
   player->meta->dst.h = 32;
 }

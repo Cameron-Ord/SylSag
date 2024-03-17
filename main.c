@@ -27,9 +27,10 @@ int main(int argc, char* argv[]) {
   }
   assign_allocated_ptrs(&sdl_class, &win, &rend, &audio);
   initialize_player(&player, &player_states, &metadata);
+  set_window_resized(&sdl_class.win->width, &sdl_class.win->height, sdl_class.win->w);
+  player.pos_x = (sdl_class.win->width / 2);
+  player.pos_y = (sdl_class.win->height / 2);
   create_player_sprite(rend.r, &player);
-
-  printf("MOVING STATUS : %d\n", player.player_states->is_moving);
   sdl_class.running = 1;
   inputs.running    = &sdl_class.running;
   while (sdl_class.running) {
@@ -67,8 +68,8 @@ int create_contexts(Renderer* rend, Window* win) {
   return 0;
 }
 int create_window(Window** win) {
-  (*win)->height = 400;
-  (*win)->width  = 600;
+  (*win)->height = 600;
+  (*win)->width  = 800;
   (*win)->w      = SDL_CreateWindow("Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
                                     (*win)->width, (*win)->height, 0);
   if (!(*win)->w) {
@@ -76,7 +77,7 @@ int create_window(Window** win) {
     SDL_Log("ERROR CREATING WINDOW : %s", err);
     return -1;
   }
-  SDL_SetWindowResizable((*win)->w, SDL_TRUE);
+  SDL_SetWindowResizable((*win)->w, SDL_FALSE);
   return 0;
 }
 
